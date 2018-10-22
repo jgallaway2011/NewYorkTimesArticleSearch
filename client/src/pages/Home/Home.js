@@ -4,10 +4,11 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, FormBtn } from "../../components/Form";
+import { ArticleList, Article } from "../../components/List";
 
 class NYTArticles extends Component {
   state = {
-    result: {},
+    results: [],
     query: "",
     startYear: "",
     endYear: ""
@@ -27,8 +28,9 @@ class NYTArticles extends Component {
       startYear: this.state.startYear,
       endYear: this.state.endYear
     })
-      .then(res => this.setState({ result: res.data }))
-      .catch(err => console.log(err));
+      .then(res => this.setState({ results: res.data.response.docs }))
+      .catch(err => console.log(err))
+      .then(console.log(this.state.results));
   };
 
   render() {
@@ -65,9 +67,26 @@ class NYTArticles extends Component {
               <FormBtn
                 onClick={this.handleFormSubmit}
               >
-                Submit Book
+                Search
               </FormBtn>
             </form>
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md 12">
+          {this.state.results.length ? (
+              <ArticleList>
+                {this.state.results.map(result => (
+                  <Article key={result._id}>
+                      <strong>
+                        {result.headline.main} {result.byline.original}
+                      </strong>
+                  </Article>
+                ))}
+              </ArticleList>
+            ) : (
+              <h3>No Results to Display</h3>
+            )}
           </Col>
         </Row>
       </Container>
