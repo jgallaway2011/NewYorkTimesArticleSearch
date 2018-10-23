@@ -20,6 +20,7 @@ class NYTArticles extends Component {
       title: result.headline.main,
       summary: result.snippet,
       byline: result.byline.original,
+      source: result.source,
       url: result.web_url,
       pub_date: result.pub_date
     })

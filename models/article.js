@@ -7,7 +7,8 @@ const articleSchema = new Schema({
   summary: { type: String, required: true},
   byline: { type: String, required: true },
   url: { type: String, required: true},
-  pub_date: {type: Date, required: true}, 
+  source: { type: String, required: true}, 
+  pub_date: {type: Date, required: true},
   saved: { type: Date, default: Date.now }
 });
 
