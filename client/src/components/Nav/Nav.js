@@ -16,6 +16,7 @@ const Nav = () => (
         <button style={{float: "right"}} class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div> */}
+    <a href="/articles" className="btn btn-primary float-right">SAVED ARTICLES</a>
   </nav>
 );
 

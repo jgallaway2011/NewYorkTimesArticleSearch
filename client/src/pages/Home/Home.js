@@ -25,12 +25,12 @@ class NYTArticles extends Component {
     })
       .then(res => console.log(res))
       .catch(err => console.log(err))
-      .then(this.handleCardRemoval(result._id));
+      // .then(this.handleCardRemoval(result._id));
   };
 
-  handleCardRemoval = id => {
-    document.getElementById(id).remove();
-  }
+  // handleCardRemoval = id => {
+  //   document.getElementById(id).remove();
+  // }
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -95,18 +95,18 @@ class NYTArticles extends Component {
               <ArticleList>
                 {this.state.results.map(result => (
                   <Article key={result._id}>
-                    <div className="card">
+                    <div className="card mt-3 mb-3 border border-dark">
                       <div className="row no-gutters">
                         <div className="col-auto">
-                          <img className="img-fluid" src={`https://static01.nyt.com/${result.multimedia[12].url}`} alt={result.source}></img>
+                          <img className="img-fluid" src={`https://static01.nyt.com/${result.multimedia[21].url}`} alt={result.source}></img>
                         </div>
                         <div className="col">
                           <div className="card-block px-2">
                             <h4 className="card-title">{result.headline.main}</h4>
                             <p className="card-text">{result.snippet}</p>
                             <p className="card-text">{result.byline.original} from {result.pub_date}</p>
-                            <a href={result.web_url} target="_blank" rel="noopener noreferrer" className="btn btn-primary">READ</a>
-                            <button onClick={() => this.saveArticle(result)} className="btn btn-primary">SAVE</button>
+                            <a href={result.web_url} target="_blank" rel="noopener noreferrer" className="btn btn-primary mr-3 mb-3">READ</a>
+                            <button onClick={() => this.saveArticle(result)} className="btn btn-primary mb-3">SAVE</button>
                           </div>
                         </div>
                       </div>

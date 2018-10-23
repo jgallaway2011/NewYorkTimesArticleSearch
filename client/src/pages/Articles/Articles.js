@@ -1,17 +1,25 @@
 import React, { Component } from "react";
 // import DeleteBtn from "../../components/DeleteBtn";
 import Jumbotron from "../../components/Jumbotron";
-// import API from "../../utils/API";
+import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 
 class Articles extends Component {
   state = {
     articles: [],
-    title: "",
-    date: "",
-    url: ""
   };
 
+  componentDidMount() {
+    this.loadArticles();
+  }
+
+  loadArticles = () => {
+    API.getArticles()
+      .then(res =>
+        this.setState({ articles: res.data })
+      )
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
@@ -19,7 +27,7 @@ class Articles extends Component {
         <Row>
           <Col size="md-12">
             <Jumbotron>
-              <h1>What Books Should I Read?</h1>
+              <h1>SAVED ARTICLES</h1>
             </Jumbotron>
           </Col>
         </Row>
