@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../components/DeleteBtn";
-import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
+import Jumbotron from "../../components/Jumbotron";
 import { Col, Row, Container } from "../../components/Grid";
 import { ArticleList, Article } from "../../components/List";
+import DeleteBtn from "../../components/DeleteBtn";
 
 class Articles extends Component {
   state = {
-    articles: [],
+    articles: []
   };
 
   componentDidMount() {
