@@ -23,14 +23,13 @@ class NYTArticles extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    API.search({
+    API.searchArticles({
       query: this.state.query,
       startYear: this.state.startYear,
       endYear: this.state.endYear
     })
-      .then(res => this.setState({ results: res.data.response.docs }))
+      .then(res => this.setState({ results: res.data.response.docs, query: "", startYear: "", endYear: "" }))
       .catch(err => console.log(err))
-      .then(console.log(this.state.results));
   };
 
   render() {

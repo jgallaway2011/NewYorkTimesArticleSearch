@@ -4,24 +4,17 @@ const BASEURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-ke
 const APIKEY = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
 
 export default {
-  search: function(query, startYear, endYear) {
-    if (query && startYear && endYear) {
-      return axios.get(BASEURL + APIKEY + "&q=" + query + "&begin_date=" + startYear + "0101&end_date=" + endYear + "0101")
-    } else if (!query && startYear && endYear) {
-      return axios.get(BASEURL + APIKEY + "&begin_date=" + startYear + "0101&end_date=" + endYear + "0101")
-    } else if (query && !startYear && endYear) {
-      return axios.get(BASEURL + APIKEY + "&q=" + query + "&end_date=" + endYear + "0101")
-    } else if (query && startYear && !endYear) {
-      return axios.get(BASEURL + APIKEY + "&q=" + query + "&begin_date=" + startYear + "0101")
-    } else if (query && !startYear && !endYear) {
-      return axios.get(BASEURL + APIKEY + "&q=" + query)
-    } else if (!query && startYear && !endYear) {
-      return axios.get(BASEURL + APIKEY + "&begin_date=" + startYear + "0101")
-    } else if (!query && !startYear && endYear) {
-      return axios.get(BASEURL + APIKEY + "&end_date=" + endYear + "0101")
-    } else {
-      return axios.get(BASEURL + APIKEY);
+  searchArticles: function(params) {
+    console.log("These are the params: ", params);
+    let searchParams = "&q=" + params.query
+    if (parseInt(params.startYear, 4)) {
+      searchParams = searchParams + "&begin_date=" + params.startYear + "01010";
     }
+    if (parseInt(params.endYear, 4)) {
+      searchParams = searchParams + "&end_date=" + params.endYear + "0101";
+    }
+    console.log("These are the search params: ", searchParams);
+    return axios.get(BASEURL + APIKEY + searchParams)
   },
   // Gets all books
   getArticles: function() {
