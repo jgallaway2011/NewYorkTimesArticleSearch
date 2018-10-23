@@ -14,6 +14,24 @@ class NYTArticles extends Component {
     endYear: ""
   };
 
+  saveArticle = (result) => {
+    API.saveArticle({
+      image: `https://static01.nyt.com/${result.multimedia[12].url}`,
+      title: result.headline.main,
+      summary: result.snippet,
+      byline: result.byline.original,
+      url: result.web_url,
+      pub_date: result.pub_date
+    })
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+      .then(this.handleCardRemoval(result._id));
+  };
+
+  handleCardRemoval = id => {
+    document.getElementById(id).remove();
+  }
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -80,14 +98,15 @@ class NYTArticles extends Component {
                     <div className="card">
                       <div className="row no-gutters">
                         <div className="col-auto">
-                          <img clasName="img-fluid" src={`https://static01.nyt.com/${result.multimedia[12].url}`} alt={result.source}></img>
+                          <img className="img-fluid" src={`https://static01.nyt.com/${result.multimedia[12].url}`} alt={result.source}></img>
                         </div>
                         <div className="col">
                           <div className="card-block px-2">
                             <h4 className="card-title">{result.headline.main}</h4>
                             <p className="card-text">{result.snippet}</p>
-                            <p className="card-tect">{result.byline.original}</p>
-                            <a href={result.web_url} target="_blank" rel="noopener noreferrer" class="btn btn-primary">READ</a>
+                            <p className="card-text">{result.byline.original} from {result.pub_date}</p>
+                            <a href={result.web_url} target="_blank" rel="noopener noreferrer" className="btn btn-primary">READ</a>
+                            <button onClick={() => this.saveArticle(result)} className="btn btn-primary">SAVE</button>
                           </div>
                         </div>
                       </div>
