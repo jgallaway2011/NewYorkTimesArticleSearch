@@ -8,7 +8,7 @@ export default {
     console.log("These are the params: ", params);
     let searchParams = "&q=" + params.query
     if (parseInt(params.startYear, 4)) {
-      searchParams = searchParams + "&begin_date=" + params.startYear + "01010";
+      searchParams = searchParams + "&begin_date=" + params.startYear + "0101";
     }
     if (parseInt(params.endYear, 4)) {
       searchParams = searchParams + "&end_date=" + params.endYear + "0101";
