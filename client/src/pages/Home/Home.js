@@ -73,19 +73,31 @@ class NYTArticles extends Component {
         </Row>
         <Row>
           <Col size="md 12">
-          {this.state.results.length ? (
+            {this.state.results.length ? (
               <ArticleList>
                 {this.state.results.map(result => (
                   <Article key={result._id}>
-                      <strong>
-                        {result.headline.main} {result.byline.original}
-                      </strong>
+                    <div className="card">
+                      <div className="row no-gutters">
+                        <div className="col-auto">
+                          <img clasName="img-fluid" src={`https://static01.nyt.com/${result.multimedia[12].url}`} alt={result.source}></img>
+                        </div>
+                        <div className="col">
+                          <div className="card-block px-2">
+                            <h4 className="card-title">{result.headline.main}</h4>
+                            <p className="card-text">{result.snippet}</p>
+                            <p className="card-tect">{result.byline.original}</p>
+                            <a href={result.web_url} target="_blank" rel="noopener noreferrer" class="btn btn-primary">READ</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </Article>
                 ))}
               </ArticleList>
             ) : (
-              <h3>No Results to Display</h3>
-            )}
+                <h3>No Results to Display</h3>
+              )}
           </Col>
         </Row>
       </Container>
