@@ -24,7 +24,7 @@ class Articles extends Component {
 
   deleteArticle = id => {
     API.deleteArticle(id)
-      .then(res => this.loadArticles())
+      .then(() => this.loadArticles())
       .catch(err => console.log(err));
   };
 
