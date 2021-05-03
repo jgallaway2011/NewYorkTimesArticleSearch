@@ -47,7 +47,10 @@ class NYTArticles extends Component {
       startYear: this.state.startYear,
       endYear: this.state.endYear
     })
-      .then(res => this.setState({ results: res.data.response.docs, query: "", startYear: "", endYear: "" }))
+      .then(res => {
+        console.log(res);
+        this.setState({ results: res.data.response.docs, query: "", startYear: "", endYear: "" })
+      })
       .catch(err => console.log(err))
   };
 
